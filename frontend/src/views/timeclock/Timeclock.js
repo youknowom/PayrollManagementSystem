@@ -5,6 +5,7 @@ function Timeclock() {
     <div>
       Timeclock employee 200
       <h1>hello</h1>
+      <h1>bye</h1>
     </div>
   )
 }
