@@ -4,10 +4,12 @@ import Timeclock from './views/timeclock/Timeclock'
 import Payroll from './views/payroll/Payroll'
 import Employees from './views/employees/Employees'
 import Dashboard from './views/dashboard/Dashboard'
+import Profile from './views/profile/Profile'
 // const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  { path: '/profile', name: 'profile', element: Profile },
   { path: '/employees', name: 'Employees', element: Employees },
   { path: '/attendance', name: 'Attendance', element: Attendance },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
