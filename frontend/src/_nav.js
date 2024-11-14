@@ -13,6 +13,13 @@ import { CNavGroup, CNavItem } from '@coreui/react'
 const _nav = [
   {
     component: CNavItem,
+    name: 'Profile',
+    to: '/profile', // Update to the route for the profile page if you have one
+    icon: <Person className="nav-icon" />,
+    className: 'sidebar-profile', // Optional: Add a custom class for styling
+  },
+  {
+    component: CNavItem,
     name: 'Dashboard',
     to: '/dashboard',
     icon: <Speedometer className="nav-icon" />,
