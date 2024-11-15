@@ -345,11 +345,11 @@ const AttendanceForm = () => {
         <div>
             <h2>Employee Attendance</h2>
             <form onSubmit={handleSubmit}>
-                <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-                <input type="text" value={empId} onChange={(e) => setEmpId(e.target.value)} placeholder="Emp ID" required />
-                <input type="time" value={inTime} onChange={(e) => setInTime(e.target.value)} required />
-                <input type="time" value={outTime} onChange={(e) => setOutTime(e.target.value)} placeholder="Out Time" />
-                <button type="button" onClick={() => setIsCameraOpen(true)}>
+                <input type="date" className='space' value={date} onChange={(e) => setDate(e.target.value)} required />
+                <input type="text" className='space' value={empId} onChange={(e) => setEmpId(e.target.value)} placeholder="Emp ID" required />
+                <input type="time" className='space' value={inTime} onChange={(e) => setInTime(e.target.value)} required />
+                <input type="time" className='space' value={outTime} onChange={(e) => setOutTime(e.target.value)} placeholder="Out Time" />
+                <button type="button" className='space  ' onClick={() => setIsCameraOpen(true)}>
                     📷
                 </button>
                 {isCameraOpen && (
@@ -358,10 +358,10 @@ const AttendanceForm = () => {
                         <button type="button" onClick={handleCapture}>Capture Photo</button>
                     </div>
                 )}
-                <button type="submit">Add Attendance</button>
-            </form>
+                <button type="submit" className='Button'>Add Attendance</button>
+            </form>     
 
-            <h3>Attendance Records</h3>
+            <h3 className='up'>Attendance Records</h3>         
             <table>
                 <thead>
                     <tr>
