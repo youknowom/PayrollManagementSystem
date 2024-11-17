@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './addEmployee.css'
 
-const API_URL = 'http://localhost:8080/student'
+const API_URL = 'http://localhost:8080/employee'
 
 const AddEmployee = () => {
   const [fname, setFname] = useState('')
