@@ -1,4 +1,3 @@
-// export default Employees
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -52,23 +51,17 @@ const Employees = () => {
   return (
     <div className="main">
       <h2>Employee Information</h2>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          marginBottom: '10px',
-        }}
-      >
+      <div className="header-container">
+        <div style={{ flex: 1 }}></div> {/* This is used to push search bar to the right */}
         <input
           type="text"
           placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
+          className="search-bar"
         />
-        {/* <Link to="/add" className="button-link">
-          Add Employee
-        </Link> */}
       </div>
+
       <table border="1" cellPadding="10" className="custom-table">
         <thead>
           <tr>
@@ -90,7 +83,7 @@ const Employees = () => {
                 <Link to={`/update/${emp._id}`} className="button-link">
                   Update
                 </Link>
-                <button onClick={() => handleDelete(emp._id)} className="button-link">
+                <button onClick={() => handleDelete(emp._id)} className="button-link delete-btn">
                   Delete
                 </button>
               </td>

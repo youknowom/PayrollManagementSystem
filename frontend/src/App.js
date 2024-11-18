@@ -31,6 +31,7 @@
 
 // export default App
 import React, { Suspense } from 'react'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { CSpinner } from '@coreui/react'
