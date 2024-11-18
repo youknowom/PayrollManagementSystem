@@ -4,6 +4,7 @@
   border-collapse: collapse;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
+  overflow-x: auto; /* Make table scrollable on smaller screens */
 }
 
 .custom-table th,
@@ -20,6 +21,8 @@
 .custom-table td {
   border-bottom: 1px solid #dee2e6;
 }
+
+/* Delete button styling */
 .delete-btn {
   padding: 5px 8px;
   background-color: #dc3545;
@@ -36,6 +39,8 @@
 /* Search container for better spacing */
 .search-container {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .search-container input {
@@ -45,7 +50,8 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-/* Container for header and button */
+
+/* Header container for table and buttons */
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -73,13 +79,13 @@
 .button-link:hover,
 .update-link:hover,
 .delete-btn:hover {
-  background-color: #dc3545;
+  background-color: #c82333;
 }
 
 .button-link:active,
 .update-link:active,
 .delete-btn:active {
-  background-color: #dc3545;
+  background-color: #b21f2d;
 }
 
 /* Specific styling for Delete button */
@@ -95,38 +101,46 @@
   background-color: #b21f2d;
 }
 
-/* Customize table */
-.custom-table {
-  width: 100%;
-  border-collapse: collapse;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
+/* Media Query for smaller screens (responsive adjustments) */
+@media (max-width: 768px) {
+  .custom-table {
+    width: 100%;
+    display: block; /* Make table block-level */
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+  }
+
+  .search-container {
+    justify-content: flex-start;
+  }
+
+  .search-container input {
+    width: 100%; /* Make search bar take full width on small screens */
+    max-width: none; /* Allow input to expand */
+  }
+
+  .header-container {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    align-items: flex-start;
+  }
+
+  .button-link,
+  .update-link,
+  .delete-btn {
+    width: 100%; /* Make buttons take full width on smaller screens */
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 }
 
-.custom-table th,
-.custom-table td {
-  padding: 15px;
-  text-align: left;
-}
+@media (max-width: 480px) {
+  .search-container input {
+    padding: 8px; /* Reduce padding on very small screens */
+  }
 
-.custom-table th {
-  background-color: #f8f9fa;
-  border-bottom: 2px solid #dee2e6;
-}
-
-.custom-table td {
-  border-bottom: 1px solid #dee2e6;
-}
-
-/* Search container */
-.search-container {
-  margin-bottom: 20px;
-}
-
-.search-container input {
-  padding: 10px;
-  width: 100%;
-  max-width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  .button-link,
+  .update-link,
+  .delete-btn {
+    padding: 10px; /* Adjust button size on very small screens */
+  }
 }
