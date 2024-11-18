@@ -1,34 +1,3 @@
-// import React, { Suspense } from 'react'
-// import { HashRouter, Routes, Route } from 'react-router-dom'
-// import { useSelector } from 'react-redux'
-// import { CSpinner } from '@coreui/react'
-// import './scss/style.scss'
-
-// // Containers
-// const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
-// const AddEmployee = React.lazy(() => import('./views/employees/AddEmployee'))
-
-// const App = () => {
-//   const storedTheme = useSelector((state) => state.theme)
-
-//   return (
-//     <HashRouter>
-//       <Suspense
-//         fallback={
-//           <div className="pt-3 text-center">
-//             <CSpinner color="primary" variant="grow" />
-//           </div>
-//         }
-//       >
-//         <Routes>
-//           <Route path="*" name="Home" element={<DefaultLayout />} />
-//           <Route path="/employees/add" element={<AddEmployee />} /> {/* Ensure route is set */}
-//         </Routes>
-//       </Suspense>
-//     </HashRouter>
-//   )
-// }
-
 // export default App
 import React, { Suspense } from 'react'
 import 'bootstrap-icons/font/bootstrap-icons.css'

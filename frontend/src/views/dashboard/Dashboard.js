@@ -1,17 +1,37 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import './dashboard.css'
 
+const API_URL = 'http://localhost:8080/employee' // Database API URL
+
 const Dashboard = () => {
+  const [employees, setEmployees] = useState([])
+
+  useEffect(() => {
+    fetchEmployees()
+  }, [])
+
+  const fetchEmployees = async () => {
+    try {
+      const response = await axios.get(API_URL)
+      setEmployees(response.data)
+    } catch (error) {
+      console.error('Error fetching employees:', error)
+    }
+  }
+
+  const recentEmployees = employees.slice(-3).reverse()
+
   return (
     <div className="dashboard">
       <div className="dashboard-summary">
         <div className="card">
           <h3>Total Employees</h3>
-          <p>150</p>
+          <p>{employees.length}</p>
         </div>
         <div className="card">
           <h3>New Employees</h3>
-          <p>10</p>
+          <p>{employees.length}</p>
         </div>
         <div className="card">
           <h3>Pending Payrolls</h3>
@@ -39,7 +59,13 @@ const Dashboard = () => {
         <ul>
           <li>Payroll processed for October 2024</li>
           <li>Solanki added as a new employee</li>
-          <li>Salary revised for Taskar</li>
+          <ul>
+            {recentEmployees.map((emp) => (
+              <li key={emp._id}>
+                {emp.fname} {emp.lname} added as a new employee
+              </li>
+            ))}
+          </ul>
         </ul>
       </div>
     </div>
