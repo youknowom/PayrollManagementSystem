@@ -58,7 +58,6 @@ const Dashboard = () => {
         <h3>Recent Activities</h3>
         <ul>
           <li>Payroll processed for October 2024</li>
-          <li>Solanki added as a new employee</li>
           <ul>
             {recentEmployees.map((emp) => (
               <li key={emp._id}>
