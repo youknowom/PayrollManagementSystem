@@ -1,13 +1,24 @@
-//including
-// prettier-ignore
-const { addEmployee, findEmployees, findEmployeeByID, updateEmployee, deleteEmployee } = require("./controllers/employeeController");
+// employeeRoutes.js
 const express = require("express");
-const { route } = require("./routes/employeeRoutes");
-const router = express();
-router.post("/add", addEmployee);
-router.get("/findall", findEmployees);
-router.get("/employee/:id", findEmployeeByID);
-router.put("/update/:id", updateEmployee);
-router.delete("/delete/:id", deleteEmployee);
+const {
+  getEmployees,
+  createEmployee,
+  addEmployee,
+  findEmployees,
+  findEmployeeByID,
+  updateEmployee,
+  deleteEmployee,
+} = require("../controllers/employeeController");
+
+const router = express.Router();
+
+// Define employee-specific routes
+router.get("/", getEmployees); // Get all employees
+router.post("/", createEmployee); // Create a new employee
+router.post("/add", addEmployee); // Add employee with detailed fields
+router.get("/findall", findEmployees); // Fetch all employees
+router.get("/employee/:id", findEmployeeByID); // Find an employee by ID
+router.put("/update/:id", updateEmployee); // Update an employee by ID
+router.delete("/delete/:id", deleteEmployee); // Delete an employee by ID
 
 module.exports = router;
