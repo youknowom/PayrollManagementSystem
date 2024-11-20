@@ -14,12 +14,11 @@ const UpdateEmployee = () => {
   })
   const navigate = useNavigate()
 
-  // Fetch employee details on component mount
   useEffect(() => {
     const fetchEmployee = async () => {
       try {
-        const response = await axios.get(`${API_URL}/${id}`) // Fixed API endpoint
-        setEmployee(response.data.data) // Update state with fetched data
+        const response = await axios.get(`${API_URL}/${id}`)
+        setEmployee(response.data) // Assuming the employee data is directly returned
       } catch (error) {
         alert('Error fetching employee data')
         console.error(error)
@@ -31,17 +30,17 @@ const UpdateEmployee = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setEmployee({ ...employee, [name]: value }) // Update employee state
+    setEmployee({ ...employee, [name]: value })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.put(`${API_URL}/update/${id}`, employee) // Update employee using PUT
+      await axios.put(`${API_URL}/${id}`, employee)
       alert('Employee Updated Successfully')
-      navigate('/') // Navigate to home or employee list page
+      navigate('/employees') // Redirect to employee list after update
     } catch (error) {
-      alert('Error updating Employee')
+      alert('Error updating employee')
       console.error(error)
     }
   }
@@ -67,7 +66,7 @@ const UpdateEmployee = () => {
           required
         />
         <input
-          type="text"
+          type="email"
           name="email"
           placeholder="Email"
           value={employee.email}
@@ -75,7 +74,7 @@ const UpdateEmployee = () => {
           required
         />
         <input
-          type="number"
+          type="text" // Use text to handle contact number as a string
           name="contact"
           placeholder="Contact Number"
           value={employee.contact}
