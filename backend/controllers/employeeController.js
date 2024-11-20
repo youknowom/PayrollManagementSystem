@@ -248,13 +248,12 @@ const createEmployee = async (req, res) => {
 // Add a new employee with specific fields
 const addEmployee = async (req, res) => {
   try {
-    const { fname, lname, email, contact, department } = req.body;
+    const { fname, lname, email, contact } = req.body;
     const newEmployee = new Employee({
       fname,
       lname,
       email,
       contact,
-      department,
     });
     const employeeData = await newEmployee.save();
     res.status(200).send({ msg: "Employee added successfully", employeeData });
@@ -286,7 +285,7 @@ const updateEmployee = async (req, res) => {
 
     const updatedEmployee = await Employee.findByIdAndUpdate(
       id,
-      { $set: { fname, lname, email, contact, department } },
+      { $set: { fname, lname, email, contact } },
       { new: true }
     );
 
@@ -295,11 +294,9 @@ const updateEmployee = async (req, res) => {
         .status(200)
         .send({ msg: "Employee data has been updated", updatedEmployee });
     } else {
-      res
-        .status(400)
-        .send({
-          msg: "No changes made to the employee data or employee not found",
-        });
+      res.status(400).send({
+        msg: "No changes made to the employee data or employee not found",
+      });
     }
   } catch (error) {
     res.status(500).send({ error });
