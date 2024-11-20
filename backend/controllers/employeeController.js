@@ -1,50 +1,113 @@
 // const Employee = require("../models/Employee");
 
-// exports.getEmployees = async (req, res) => {
+// // Get all employees (findall)
+// const getEmployees = async (req, res) => {
 //   try {
-//     const employees = await Employee.find();
-//     res.json(employees);
+//     const employees = await Employee.find(); // Fetch all employees from the database
+//     res.json(employees); // Send the employee list as JSON
 //   } catch (error) {
-//     res.status(500).json({ message: error.message });
+//     console.error(error);
+//     res.status(500).json({ message: "Error fetching employees" });
 //   }
 // };
 
-// exports.createEmployee = async (req, res) => {
-//   const employee = new Employee(req.body);
+// // Create a new employee
+// const createEmployee = async (req, res) => {
 //   try {
-//     const savedEmployee = await employee.save();
-//     res.status(201).json(savedEmployee);
+//     const newEmployee = new Employee(req.body); // Create a new Employee instance
+//     await newEmployee.save(); // Save to the database
+//     res.status(201).json(newEmployee); // Respond with the created employee
 //   } catch (error) {
-//     res.status(400).json({ message: error.message });
+//     console.error(error);
+//     res.status(500).json({ message: "Error creating employee" });
 //   }
 // };
-// controllers/employeeController.js
-const Employee = require("../models/Employee"); // Assuming you're using Mongoose
 
-// Get all employees (findall)
-const getEmployees = async (req, res) => {
+// module.exports = {
+//   getEmployees,
+//   createEmployee,
+// };
+const Employee = require("../models/Employee");
+
+// Add a new employee
+const addEmployee = async (req, res) => {
   try {
-    const employees = await Employee.find(); // Fetch all employees from the database
-    res.json(employees); // Send the employee list as JSON
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error fetching employees" });
+    const newEmployee = new Employee({
+      fname: req.body.fname,
+      lname: req.body.lname,
+      email: req.body.email,
+      contact: req.body.contact,
+    });
+    const employeeData = await newEmployee.save();
+    res.status(200).send({ msg: "Employee added successfully", employeeData });
+  } catch (err) {
+    res.status(400).send({ err });
   }
 };
 
-// Create a new employee
-const createEmployee = async (req, res) => {
+// Get all employees
+const findEmployees = async (req, res) => {
   try {
-    const newEmployee = new Employee(req.body); // Create a new Employee instance
-    await newEmployee.save(); // Save to the database
-    res.status(201).json(newEmployee); // Respond with the created employee
+    const data = await Employee.find();
+    res.status(200).send({ data });
+  } catch (err) {
+    res.status(500).send({ err });
+  }
+};
+
+// Get an employee by ID
+const findEmployeeByID = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await Employee.findById(id);
+    if (data) {
+      res.status(200).send({ data });
+    } else {
+      res.status(404).send({ msg: "Employee not found" });
+    }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error creating employee" });
+    res.status(500).send({ error });
+  }
+};
+
+// Update an employee
+const updateEmployee = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { fname, lname, email, contact, department } = req.body; // Adjust fields as needed
+    const data = await Employee.updateOne(
+      { _id: id },
+      { $set: { fname, lname, email, contact, department } }
+    );
+    if (data.modifiedCount > 0) {
+      res.status(200).send({ msg: "Employee data has been updated" });
+    } else {
+      res.status(400).send({ msg: "No changes made to the employee data" });
+    }
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+};
+
+// Delete an employee
+const deleteEmployee = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await Employee.deleteOne({ _id: id });
+    if (data.deletedCount > 0) {
+      res.status(200).send({ message: "Employee is deleted successfully" });
+    } else {
+      res.status(400).send({ msg: "No employee found to delete" });
+    }
+  } catch (error) {
+    res.status(500).send({ error });
   }
 };
 
 module.exports = {
-  getEmployees,
-  createEmployee,
+  addEmployee,
+  findEmployees,
+  findEmployeeByID,
+  updateEmployee,
+  deleteEmployee,
 };
