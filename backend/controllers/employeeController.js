@@ -265,15 +265,16 @@ const addEmployee = async (req, res) => {
 // Get an employee by ID
 const findEmployeeByID = async (req, res) => {
   try {
-    const id = req.params.id;
-    const data = await Employee.findById(id);
+    const id = req.params._id;
+    const data = await Employee.findOne(id);
     if (data) {
       res.status(200).send({ data });
     } else {
       res.status(404).send({ msg: "Employee not found" });
     }
   } catch (error) {
-    res.status(500).send({ error });
+    // res.status(500).send({ error });
+    console.log(error);
   }
 };
 
