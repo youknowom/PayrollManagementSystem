@@ -18,7 +18,7 @@ const UpdateEmployee = () => {
     const fetchEmployee = async () => {
       try {
         const response = await axios.get(`${API_URL}/${id}`)
-        setEmployee(response.data) // Assuming the employee data is directly returned
+        setEmployee(response.data.data) // Assuming the employee data is directly returned
       } catch (error) {
         alert('Error fetching employee data')
         console.error(error)

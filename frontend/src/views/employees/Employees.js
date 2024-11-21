@@ -1,46 +1,46 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import './Employees.css' // Importing the CSS file
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import './Employees.css'
 
 const API_URL = 'http://localhost:8080/employee'
 
 const Employees = () => {
-  const [employee, setEmployee] = useState([]) // Employee state
+  const [employee, setEmployee] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
 
-  // Fetching employees on initial load
   useEffect(() => {
-    fetchEmployee() // Fetch employees
+    fetchEmployee()
   }, [])
 
   const fetchEmployee = async () => {
     try {
-      // Ensure the endpoint matches the backend route
       const response = await axios.get(API_URL)
-      setEmployee(response.data) // Update state with fetched data
+      setEmployee(response.data)
+      toast.success('Employees fetched successfully!')
     } catch (error) {
       console.error('Error fetching employees:', error)
+      toast.error('Error fetching employees!')
     }
   }
 
-  // Handle search input change
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value)
   }
 
-  // Handle delete employee action
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${API_URL}/delete/${id}`)
-      fetchEmployee() // Refresh the list after deletion
+      await axios.delete(`${API_URL}/${id}`)
+      toast.success('Employee deleted successfully!')
+      fetchEmployee()
     } catch (error) {
-      alert('Error deleting employee')
       console.error('Error deleting employee:', error)
+      toast.error('Error deleting employee!')
     }
   }
 
-  // Filter employee list based on search term
   const filteredEmployee = employee.filter(
     (emp) =>
       emp.fname?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -50,9 +50,10 @@ const Employees = () => {
 
   return (
     <div className="main">
+      <ToastContainer position="top-right" autoClose={3000} />
       <h2>Employee Information</h2>
       <div className="header-container">
-        <div style={{ flex: 1 }}></div> {/* This is used to push search bar to the right */}
+        <div style={{ flex: 1 }}></div>
         <input
           type="text"
           placeholder="Search..."
@@ -61,7 +62,6 @@ const Employees = () => {
           className="search-bar"
         />
       </div>
-
       <table border="1" cellPadding="10" className="custom-table">
         <thead>
           <tr>

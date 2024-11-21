@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   CCloseButton,
@@ -12,9 +13,15 @@ import { AppSidebarNav } from './AppSidebarNav'
 import navigation from '../_nav'
 
 const AppSidebar = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
+
+  // Function to handle sidebar brand click and navigate to dashboard
+  const handleCardClick = () => {
+    navigate('/dashboard') // Redirect to dashboard on click
+  }
 
   return (
     <CSidebar
@@ -29,6 +36,7 @@ const AppSidebar = () => {
       <CSidebarHeader className="border-bottom">
         <CSidebarBrand to="/" className="text-center" style={{ textDecoration: 'none' }}>
           <span
+            onClick={handleCardClick} // Call handleCardClick on click
             className="sidebar-brand-text"
             style={{
               fontSize: '1.8rem',
@@ -36,6 +44,7 @@ const AppSidebar = () => {
               color: '#000', // Adjust color as needed
               display: 'block',
               padding: '10px 0', // Adds some padding for spacing
+              cursor: 'pointer', // Add cursor pointer here
             }}
           >
             Stedfast

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import './addEmployee.css'
 
 const API_URL = 'http://localhost:8080/employee'
@@ -16,21 +18,30 @@ const AddEmployee = () => {
     e.preventDefault()
 
     try {
-      await axios.post(API_URL, {
+      const response = await axios.post(API_URL, {
         fname,
         lname,
         email,
         contact,
       })
-      navigate('/employees')
+
+      if (response.status === 201 || response.status === 200) {
+        toast.success('Employee added successfully!')
+        setTimeout(() => navigate('/employees'), 2000) // Navigate after toast
+      }
     } catch (error) {
-      alert('Error adding employee')
+      if (error.response?.status === 409) {
+        toast.error('Email already exists!')
+      } else {
+        toast.error('Error adding employee!')
+      }
       console.error('Error adding employee:', error)
     }
   }
 
   return (
     <div className="add-employee">
+      <ToastContainer position="top-right" autoClose={3000} />
       <h2>Add Employee</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
