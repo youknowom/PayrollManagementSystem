@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import './updateemployee.css'
 import { useNavigate, useParams } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-const API_URL = 'http://localhost:8000/employee'
+const API_URL = 'http://localhost:8080/employee'
 
 const UpdateEmployee = () => {
   const { id } = useParams()
@@ -20,7 +23,7 @@ const UpdateEmployee = () => {
         const response = await axios.get(`${API_URL}/${id}`)
         setEmployee(response.data.data) // Assuming the employee data is directly returned
       } catch (error) {
-        alert('Error fetching employee data')
+        toast.error('Error fetching employee data')
         console.error(error)
       }
     }
@@ -37,16 +40,16 @@ const UpdateEmployee = () => {
     e.preventDefault()
     try {
       await axios.put(`${API_URL}/${id}`, employee)
-      alert('Employee Updated Successfully')
-      navigate('/employees') // Redirect to employee list after update
+      toast.success('Employee Updated Successfully')
+      setTimeout(() => navigate('/employees'), 1000) // Redirect after 1 seconds
     } catch (error) {
-      alert('Error updating employee')
+      toast.error('Error updating employee')
       console.error(error)
     }
   }
 
   return (
-    <div>
+    <div className="update-employee">
       <h2>Update Employee</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -83,6 +86,7 @@ const UpdateEmployee = () => {
         />
         <button type="submit">Update Employee</button>
       </form>
+      <ToastContainer />
     </div>
   )
 }
