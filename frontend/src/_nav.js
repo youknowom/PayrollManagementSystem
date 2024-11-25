@@ -7,6 +7,7 @@ import {
   Pencil,
   Eye,
   Speedometer,
+  Calculator,
 } from 'react-bootstrap-icons'
 import { CNavGroup, CNavItem } from '@coreui/react'
 
@@ -61,10 +62,25 @@ const _nav = [
     roles: ['user'],
   },
   {
-    component: CNavItem,
+    component: CNavGroup,
     name: 'Payroll',
     to: '/payroll',
     icon: <Wallet className="nav-icon" />,
+    roles: ['admin'],
+    items: [
+      {
+        component: CNavItem,
+        name: 'Generate Reports',
+        to: '/generatereports',
+        icon: <Eye className="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Salary Calculation',
+        to: '/salary',
+        icon: <Calculator className="nav-icon" />,
+      },
+    ],
   },
 ]
 

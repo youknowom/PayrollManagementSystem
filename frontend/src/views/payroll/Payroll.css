@@ -1,0 +1,14 @@
+.pdf-download-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.pdf-download-btn:hover {
+  background-color: #0056b3;
+}
