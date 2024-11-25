@@ -1,13 +1,30 @@
+// import React from 'react'
+// import { createRoot } from 'react-dom/client'
+// import { Provider } from 'react-redux'
+// import 'core-js'
+
+// import App from './App'
+// import store from './store'
+
+// createRoot(document.getElementById('root')).render(
+//   <Provider store={store}>
+//     <App />
+//   </Provider>,
+// )
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
-import 'core-js'
+import 'core-js' // Polyfills for older browsers if needed
 
-import App from './App'
-import store from './store'
+import App from './App' // Your main app component
+import store from './store' // Your Redux store
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <App />
+    {' '}
+    <React.StrictMode>
+      {' '}
+      <App />
+    </React.StrictMode>
   </Provider>,
 )

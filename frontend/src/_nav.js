@@ -23,12 +23,14 @@ const _nav = [
     name: 'Dashboard',
     to: '/dashboard',
     icon: <Speedometer className="nav-icon" />,
+    roles: ['admin', 'user'],
   },
   {
     component: CNavGroup,
     name: 'Employees',
     to: '/employees',
     icon: <Person className="nav-icon" />,
+    roles: ['admin', 'user'],
     items: [
       {
         component: CNavItem,
@@ -49,12 +51,14 @@ const _nav = [
     name: 'Attendance',
     to: '/attendance',
     icon: <CardChecklist className="nav-icon" />,
+    roles: ['user'],
   },
   {
     component: CNavItem,
     name: 'Timeclock',
     to: '/timeclock',
     icon: <Clock className="nav-icon" />,
+    roles: ['user'],
   },
   {
     component: CNavItem,
