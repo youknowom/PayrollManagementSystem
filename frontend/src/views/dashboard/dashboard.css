@@ -41,7 +41,7 @@
 
 .card p {
   font-size: 24px;
-  color: #007bff;
+  color: #eb5866;
   font-weight: 500;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .recent-activities li:hover {
-  color: #007bff;
+  color: #eb5866;
   cursor: pointer;
 }
 
@@ -160,7 +160,7 @@
 .page-title {
   font-size: 24px;
   font-weight: 600;
-  color: #f86b6b;
+  color: #ea4646;
   margin-bottom: 20px;
 }
 

@@ -19,7 +19,7 @@ const Employees = () => {
     try {
       const response = await axios.get(API_URL)
       setEmployee(response.data)
-      toast.success('Employees fetched successfully!')
+      // toast.success('Employees fetched successfully!')
     } catch (error) {
       console.error('Error fetching employees:', error)
       toast.error('Error fetching employees!')
@@ -80,10 +80,10 @@ const Employees = () => {
               <td>{emp.email}</td>
               <td>{emp.contact}</td>
               <td>
-                <Link to={`/update/${emp._id}`} className="button-link">
+                <Link to={`/update/${emp._id}`} className="button-link update">
                   Update
                 </Link>
-                <button onClick={() => handleDelete(emp._id)} className="button-link delete-btn">
+                <button onClick={() => handleDelete(emp._id)} className="button-link delete">
                   Delete
                 </button>
               </td>
