@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
+
 import 'react-toastify/dist/ReactToastify.css'
 import './Employees.css'
 
@@ -19,7 +20,6 @@ const Employees = () => {
     try {
       const response = await axios.get(API_URL)
       setEmployee(response.data)
-      // toast.success('Employees fetched successfully!')
     } catch (error) {
       console.error('Error fetching employees:', error)
       toast.error('Error fetching employees!')
@@ -62,7 +62,7 @@ const Employees = () => {
           className="search-bar"
         />
       </div>
-      <table border="1" cellPadding="10" className="custom-table">
+      <table cellPadding="10" className="custom-table">
         <thead>
           <tr>
             <th>First Name</th>
@@ -79,12 +79,14 @@ const Employees = () => {
               <td>{emp.lname}</td>
               <td>{emp.email}</td>
               <td>{emp.contact}</td>
-              <td>
-                <Link to={`/update/${emp._id}`} className="button-link update">
-                  Update
+              <td className="icon-container">
+                <Link to={`/update/${emp._id}`} className="icon">
+                  <i className="bi bi-pencil-square"></i>
+                  <span className="tooltip">Update</span>
                 </Link>
-                <button onClick={() => handleDelete(emp._id)} className="button-link delete">
-                  Delete
+                <button onClick={() => handleDelete(emp._id)} className="icon">
+                  <i className="bi bi-trash"></i>
+                  <span className="tooltip">Delete</span>
                 </button>
               </td>
             </tr>

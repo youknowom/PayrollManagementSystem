@@ -11,50 +11,80 @@
 .custom-table td {
   padding: 15px;
   text-align: left;
+  border: 1px solid #dee2e6; /* Unified border for all cells */
 }
 
 .custom-table th {
   background-color: #f8f9fa;
-  border-bottom: 2px solid #dee2e6;
+  font-weight: bold;
 }
 
 .custom-table td {
-  border-bottom: 1px solid #dee2e6;
+  background-color: #ffffff;
 }
 
-/* Delete button styling */
-.delete-btn {
-  padding: 8px 12px;
-  background-color: #dc3545;
-  color: white;
-  width: 12px;
+/* Icon container styling */
+/* .icon-container {
   border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.delete-btn:hover {
-  background-color: #c82333;
-}
-
-.delete-btn:active {
-  background-color: #b21f2d;
-}
-
-/* Search container for better spacing */
-.search-container {
-  margin-bottom: 20px;
   display: flex;
-  justify-content: center;
+  gap: 10px;
+  align-items: center;
+} */
+
+/* Individual icon styling */
+.icon {
+  margin-right: 20px; /* Add spacing to the right of each icon */
+  font-size: 18px;
+  color: #495057;
+  cursor: pointer;
+  position: relative;
+  padding: 8px; /* Increase clickable area */
+  transition: color 0.3s ease;
+  border: none;
+  background: none;
+  outline: none;
 }
 
-.search-container input {
-  padding: 10px;
-  width: 100%;
-  max-width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+/* Remove margin from the last icon */
+.icon:last-child {
+  margin-right: 0;
+}
+/* Icon reset to avoid unwanted artifacts */
+.icon i {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Hover effect */
+.icon:hover {
+  color: #eb5866; /* Change color on hover */
+}
+
+/* Tooltip styling */
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #343a40;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.icon:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Header container for table and buttons */
@@ -65,91 +95,49 @@
   margin-bottom: 20px;
 }
 
-/* Shared button/link styling */
-.button-link {
-  font-weight: 500;
-  padding: 8px 16px;
-  background-color: #ea4646; /* Default button color */
-  color: white;
+/* Search bar styling */
+.search-bar {
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Button reset to avoid default browser styling */
+.icon button {
+  background: none;
   border: none;
-  border-radius: 5px;
-  font-size: 14px;
+  padding: 0;
+  margin: 0;
   cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: background-color 0.3s ease;
-  margin-right: 5px;
-}
-
-.button-link:hover {
-  background-color: #c82333;
-}
-
-.button-link:active {
-  background-color: #b21f2d;
-}
-
-/* Specific styling for Update button */
-.update-link {
-  background-color: #28a745;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.update-link:hover {
-  background-color: #218838;
-}
-
-.update-link:active {
-  background-color: #1e7e34;
 }
 
 /* Media Query for smaller screens (responsive adjustments) */
 @media (max-width: 768px) {
   .custom-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .search-bar {
     width: 100%;
-    display: block; /* Make table block-level */
-    overflow-x: auto; /* Enable horizontal scrolling for small screens */
-    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
-  }
-
-  .search-container {
-    justify-content: flex-start;
-  }
-
-  .search-container input {
-    width: 100%; /* Make search bar take full width on small screens */
-    max-width: none; /* Allow input to expand */
+    max-width: none;
   }
 
   .header-container {
-    flex-direction: column; /* Stack elements vertically on smaller screens */
+    flex-direction: column;
     align-items: flex-start;
-  }
-
-  .button-link,
-  .update-link,
-  .delete-btn {
-    width: 100%; /* Make buttons take full width on smaller screens */
-    margin-right: 0;
-    margin-bottom: 10px;
   }
 }
 
 @media (max-width: 480px) {
-  .search-container input {
-    padding: 8px; /* Reduce padding on very small screens */
+  .search-bar {
+    padding: 8px;
   }
 
-  .button-link,
-  .update-link,
-  .delete-btn {
-    padding: 10px; /* Adjust button size on very small screens */
+  .icon {
+    padding: 6px;
   }
 }
