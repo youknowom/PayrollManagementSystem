@@ -65,20 +65,30 @@ const Employees = () => {
       <table cellPadding="10" className="custom-table">
         <thead>
           <tr>
+            <th>Employee ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
             <th>Contact</th>
+            <th>Department</th>
+            <th>Joining Date</th>
+            <th>Employment Type</th>
+            <th>Salary</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody className="formbody">
           {filteredEmployee.map((emp) => (
             <tr key={emp._id}>
+              <td>{emp.eid}</td>
               <td>{emp.fname}</td>
               <td>{emp.lname}</td>
               <td>{emp.email}</td>
               <td>{emp.contact}</td>
+              <td>{emp.department}</td>
+              <td>{emp.joiningdate}</td>
+              <td>{emp.emptype}</td>
+              <td>{emp.salary}</td>
               <td className="icon-container">
                 <Link to={`/update/${emp._id}`} className="icon">
                   <i className="bi bi-pencil-square"></i>

@@ -12,8 +12,12 @@ const UpdateEmployee = () => {
   const [employee, setEmployee] = useState({
     fname: '',
     lname: '',
-    contact: '',
     email: '',
+    contact: '',
+    department: '',
+    joiningdate: '',
+    emptype: '',
+    salary: '',
   })
   const navigate = useNavigate()
 
@@ -41,7 +45,7 @@ const UpdateEmployee = () => {
     try {
       await axios.put(`${API_URL}/${id}`, employee)
       toast.success('Employee Updated Successfully')
-      setTimeout(() => navigate('/employees'), 1000) // Redirect after 1 seconds
+      setTimeout(() => navigate('/employees'), 10) // Redirect after 1 seconds
     } catch (error) {
       toast.error('Error updating employee')
       console.error(error)
@@ -77,10 +81,46 @@ const UpdateEmployee = () => {
           required
         />
         <input
-          type="text" // Use text to handle contact number as a string
+          type="text"
           name="contact"
           placeholder="Contact Number"
           value={employee.contact}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="text"
+          name="Department"
+          placeholder="Department"
+          value={employee.department}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="text"
+          name="Joining Date"
+          placeholder="Joining Date"
+          value={employee.joiningdate}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="text"
+          name="Employment Type"
+          placeholder="Employment Type"
+          value={employee.emptype}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="text"
+          name="Salary"
+          placeholder="Salary"
+          value={employee.salary}
           onChange={handleChange}
           required
         />

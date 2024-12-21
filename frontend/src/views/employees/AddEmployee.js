@@ -12,17 +12,36 @@ const AddEmployee = () => {
   const [lname, setLname] = useState('')
   const [email, setEmail] = useState('')
   const [contact, setContact] = useState('')
+  const [department, setDepartment] = useState('')
+  const [joiningdate, setJoiningDate] = useState('')
+  const [emptype, setEmploymentType] = useState('')
+  const [salary, setSalary] = useState('')
+
   const navigate = useNavigate()
+
+  // Function to generate Employee ID
+  const generateEmployeeID = () => {
+    const timestamp = Date.now().toString().slice(-6) // Use the last 6 digits of the timestamp
+    const randomNum = Math.floor(100 + Math.random() * 900) // 3-digit random number
+    return `EMP${timestamp}${randomNum}`
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    const eid = generateEmployeeID() // Generate Employee ID
+
     try {
       const response = await axios.post(API_URL, {
+        eid,
         fname,
         lname,
         email,
         contact,
+        department,
+        joiningdate,
+        emptype,
+        salary,
       })
 
       if (response.status === 201 || response.status === 200) {
@@ -65,6 +84,41 @@ const AddEmployee = () => {
             required
           />
         </div>
+        <div className="form-group">
+          <label>Department:</label>
+          <input
+            type="text"
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Joining Date:</label>
+          <input
+            type="date"
+            value={joiningdate}
+            onChange={(e) => setJoiningDate(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Employment Type:</label>
+          <input
+            type="text"
+            value={emptype}
+            onChange={(e) => setEmploymentType(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Salary:</label>
+          <input type="text" value={salary} onChange={(e) => setSalary(e.target.value)} required />
+        </div>
+
         <button type="submit" className="submit-button">
           Add Employee
         </button>
