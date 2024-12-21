@@ -19,11 +19,11 @@ const AddEmployee = () => {
 
   const navigate = useNavigate()
 
-  // Function to generate Employee ID
+  let employeeCounter = 0
+
   const generateEmployeeID = () => {
-    const timestamp = Date.now().toString().slice(-6) // Use the last 6 digits of the timestamp
-    const randomNum = Math.floor(100 + Math.random() * 900) // 3-digit random number
-    return `EMP${timestamp}${randomNum}`
+    employeeCounter += 1 // Increment the counter
+    return `E${String(employeeCounter).padStart(2, '0')}`
   }
 
   const handleSubmit = async (e) => {

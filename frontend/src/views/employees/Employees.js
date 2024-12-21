@@ -48,6 +48,14 @@ const Employees = () => {
       emp.email?.toLowerCase().includes(searchTerm.toLowerCase()),
   )
 
+  const generateEmployeeID = () => {
+    const timestamp = Date.now().toString().slice(-6) // Use the last 6 digits of the timestamp
+    const randomNum = Math.floor(100 + Math.random() * 900) // 3-digit random number
+    return `EMP${timestamp}${randomNum}`
+  }
+
+  const eid = generateEmployeeID() // Generate Employee ID
+
   return (
     <div className="main">
       <ToastContainer position="top-right" autoClose={3000} />
