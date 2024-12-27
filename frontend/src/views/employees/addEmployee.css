@@ -3,15 +3,29 @@
   margin: 2rem auto;
   padding: 2rem;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 30px;
   background-color: #f9f9f9;
+  
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .add-employee h2 {
+ 
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #333;
+  color: #403987;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 100px;
+  font-family:Noto Sans, sans-serif;
+ 
+}
+.add-employee p{
+  text-align: center;
+  font-size: medium;
+ font-style: Optima, sans-serif;
+  
+
 }
 
 .add-employee form {
@@ -24,6 +38,7 @@
 }
 
 .add-employee label {
+  
   display: block;
   margin-bottom: 0.5rem;
   color: #555;
@@ -36,6 +51,7 @@
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: #f3f3f3;
   font-size: 1rem;
   box-sizing: border-box;
   transition: border-color 0.3s ease; /* Added smooth transition for border color */
@@ -43,7 +59,7 @@
 
 .add-employee input[type='text']:focus,
 .add-employee input[type='email']:focus {
-  border-color: #007bff; /* Border color change on focus */
+  border-color: #52759a; /* Border color change on focus */
   outline: none; /* Remove default outline */
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Light shadow to indicate focus */
 }
@@ -51,15 +67,15 @@
 .add-employee button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #007bff;
+  background-color: #5f759e;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 70px;
   font-size: 1rem;
   font-weight: bold; /* Emphasizes the button text */
   cursor: pointer;
   transition:
-    background-color 0.3s ease,
+    background- color 0.3s ease,
     transform 0.2s ease; /* Smooth background and slight pop effect */
 }
 
@@ -92,4 +108,14 @@
     font-size: 0.9rem;
     padding: 0.6rem;
   }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
 }
