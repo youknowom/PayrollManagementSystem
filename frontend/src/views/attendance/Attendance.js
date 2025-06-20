@@ -1,14 +1,3 @@
-// // import React from 'react'
-
-// // function Attendance() {
-// //   return
-
-// //    <div className='Main'>
-
-// //    </div>
-// // }
-
-// // export default Attendance
 
 
 
