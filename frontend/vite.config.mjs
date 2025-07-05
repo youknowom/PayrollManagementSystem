@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcssVite from '@tailwindcss/vite' // ✅ New line
 import path from 'node:path'
 import autoprefixer from 'autoprefixer'
 
@@ -11,9 +12,7 @@ export default defineConfig(() => {
     },
     css: {
       postcss: {
-        plugins: [
-          autoprefixer({}), // add options if needed
-        ],
+        plugins: [autoprefixer()],
       },
       preprocessorOptions: {
         scss: {
@@ -34,7 +33,10 @@ export default defineConfig(() => {
         },
       },
     },
-    plugins: [react()],
+    plugins: [
+      react(),
+      tailwindcssVite(), //  Add the plugin here
+    ],
     resolve: {
       alias: [
         {
@@ -46,9 +48,6 @@ export default defineConfig(() => {
     },
     server: {
       port: 3000,
-      proxy: {
-        // https://vitejs.dev/config/server-options.html
-      },
     },
   }
 })

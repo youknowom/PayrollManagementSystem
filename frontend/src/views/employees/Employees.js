@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
-import './Employees.css'
 
 const API_URL = 'http://localhost:8080/employee'
 
@@ -49,68 +48,77 @@ const Employees = () => {
   )
 
   const generateEmployeeID = () => {
-    const timestamp = Date.now().toString().slice(-6) // Use the last 6 digits of the timestamp
-    const randomNum = Math.floor(100 + Math.random() * 900) // 3-digit random number
+    const timestamp = Date.now().toString().slice(-6)
+    const randomNum = Math.floor(100 + Math.random() * 900)
     return `EMP${timestamp}${randomNum}`
   }
 
-  const eid = generateEmployeeID() // Generate Employee ID
+  const eid = generateEmployeeID()
 
   return (
-    <div className="main">
+    <div className="p-6 bg-gray-100 min-h-screen">
       <ToastContainer position="top-right" autoClose={3000} />
-      <h2>Employee Information</h2>
-      <div className="header-container">
-        <div style={{ flex: 1 }}></div>
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">Employee Information</h2>
+      <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
+        <div className="flex-1"></div>
         <input
           type="text"
           placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
-          className="search-bar"
+          className="border border-gray-300 rounded px-4 py-2 w-full max-w-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
-      <table cellPadding="10" className="custom-table">
-        <thead>
-          <tr>
-            <th>Employee ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Contact</th>
-            <th>Department</th>
-            <th>Joining Date</th>
-            <th>Employment Type</th>
-            <th>Salary</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody className="formbody">
-          {filteredEmployee.map((emp) => (
-            <tr key={emp._id}>
-              <td>{emp.eid}</td>
-              <td>{emp.fname}</td>
-              <td>{emp.lname}</td>
-              <td>{emp.email}</td>
-              <td>{emp.contact}</td>
-              <td>{emp.department}</td>
-              <td>{emp.joiningdate}</td>
-              <td>{emp.emptype}</td>
-              <td>{emp.salary}</td>
-              <td className="icon-container">
-                <Link to={`/update/${emp._id}`} className="icon">
-                  <i className="bi bi-pencil-square"></i>
-                  <span className="tooltip">Update</span>
-                </Link>
-                <button onClick={() => handleDelete(emp._id)} className="icon">
-                  <i className="bi bi-trash"></i>
-                  <span className="tooltip">Delete</span>
-                </button>
-              </td>
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-300 shadow-md">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="p-3 text-left border">Employee ID</th>
+              <th className="p-3 text-left border">First Name</th>
+              <th className="p-3 text-left border">Last Name</th>
+              <th className="p-3 text-left border">Email</th>
+              <th className="p-3 text-left border">Contact</th>
+              <th className="p-3 text-left border">Department</th>
+              <th className="p-3 text-left border">Joining Date</th>
+              <th className="p-3 text-left border">Employment Type</th>
+              <th className="p-3 text-left border">Salary</th>
+              <th className="p-3 text-left border">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredEmployee.map((emp) => (
+              <tr key={emp._id} className="hover:bg-gray-50">
+                <td className="p-3 border">{emp.eid}</td>
+                <td className="p-3 border">{emp.fname}</td>
+                <td className="p-3 border">{emp.lname}</td>
+                <td className="p-3 border">{emp.email}</td>
+                <td className="p-3 border">{emp.contact}</td>
+                <td className="p-3 border">{emp.department}</td>
+                <td className="p-3 border">{emp.joiningdate}</td>
+                <td className="p-3 border">{emp.emptype}</td>
+                <td className="p-3 border">{emp.salary}</td>
+                <td className="p-3 border flex space-x-4 items-center">
+                  <Link
+                    to={`/update/${emp._id}`}
+                    className="text-blue-600 hover:text-blue-800 text-lg"
+                    title="Update"
+                  >
+                    <i className="bi bi-pencil-square"></i>
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(emp._id)}
+                    className="text-red-600 hover:text-red-800 text-lg"
+                    title="Delete"
+                  >
+                    <i className="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { Line } from 'react-chartjs-2'
 import { Chart as ChartJS } from 'chart.js/auto'
-import './dashboard.css'
 
 const API_URL = 'http://localhost:8080/employee'
 
@@ -43,31 +42,27 @@ const Dashboard = () => {
 
   const recentEmployees = employees.slice(-3).reverse()
 
-  // Example data for Employee Growth (You would probably need to calculate this dynamically)
   const employeeGrowthData = employees.reduce((acc, emp) => {
-    const month = new Date(emp.createdAt).toLocaleString('default', { month: 'short' }) // Get the month name
+    const month = new Date(emp.createdAt).toLocaleString('default', { month: 'short' })
     acc[month] = acc[month] ? acc[month] + 1 : 1
     return acc
   }, {})
 
-  // Convert the data into arrays for the chart
   const growthLabels = Object.keys(employeeGrowthData)
   const growthValues = Object.values(employeeGrowthData)
 
-  // Payroll Distribution Chart Data
   const payrollChartData = {
     labels: ['January', 'February', 'March', 'April', 'May'],
     datasets: [
       {
         label: 'Payroll Distribution',
-        data: [1200, 1300, 1100, 1500, 1700], // Example data
+        data: [1200, 1300, 1100, 1500, 1700],
         borderColor: 'rgba(75,192,192,1)',
         fill: false,
       },
     ],
   }
 
-  // Employee Growth Chart Data
   const employeeGrowthChartData = {
     labels: growthLabels,
     datasets: [
@@ -86,42 +81,55 @@ const Dashboard = () => {
   ]
 
   return (
-    <div className="dashboard">
-      <div className="dashboard-summary">
-        <div className="card" onClick={handleCardClick}>
-          <h3>Total Employees</h3>
-          <p>{employees.length}</p>
+    <div className="p-6 bg-gray-100 flex flex-col gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+        <div
+          className="bg-white p-6 rounded-xl shadow-md text-center cursor-pointer hover:shadow-lg transition"
+          onClick={handleCardClick}
+        >
+          <h3 className="text-base font-medium text-gray-700 mb-2">Total Employees</h3>
+          <p className="text-2xl font-semibold text-rose-500">{employees.length}</p>
         </div>
-        <div className="card">
-          <h3>New Employees</h3>
-          <p>{employees.length}</p>
+        <div className="bg-white p-6 rounded-xl shadow-md text-center cursor-pointer hover:shadow-lg transition">
+          <h3 className="text-xs font-medium text-gray-700 mb-2">New Employees</h3>
+          <p className="text-2xl font-semibold text-rose-500">{getNewEmployeesCount()}</p>
         </div>
-        <div className="card" onClick={handleCardClickpayroll}>
-          <h3>Pending Payrolls</h3>
-          <p>{getPendingPayrollsCount()}</p>
+        <div
+          className="bg-white p-6 rounded-xl shadow-md text-center cursor-pointer hover:shadow-lg transition"
+          onClick={handleCardClickpayroll}
+        >
+          <h3 className="text-sm font-medium text-gray-700 mb-2">Pending Payrolls</h3>
+          <p className="text-2xl font-semibold text-rose-500">{getPendingPayrollsCount()}</p>
         </div>
-        <div className="card" onClick={handleCardClickpayroll}>
-          <h3>Last Payroll Processed</h3>
-          <p>October 10, 2024</p>
+        <div
+          className="bg-white p-6 rounded-xl shadow-md text-center cursor-pointer hover:shadow-lg transition"
+          onClick={handleCardClickpayroll}
+        >
+          <h3 className="text-4xl font-medium text-gray-700 mb-2">Last Payroll Processed</h3>
+          <p className="text-2xl font-semibold text-rose-500">October 10, 2024</p>
         </div>
       </div>
 
-      <div className="dashboard-charts">
-        <div className="chart-card">
-          <h3>Payroll Distribution</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800">Payroll Distribution</h3>
           <Line data={payrollChartData} />
         </div>
-        <div className="chart-card">
-          <h3>Employee Growth</h3>
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800">Employee Growth</h3>
           <Line data={employeeGrowthChartData} />
         </div>
       </div>
 
-      <div className="recent-activities">
-        <h3>Recent Activities</h3>
-        <ul>
+      <div className="bg-white p-6 rounded-xl shadow-md">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">Recent Activities</h3>
+        <ul className="divide-y divide-gray-200">
           {recentActivities.map((activity, index) => (
-            <li onClick={handleCardClick} key={index}>
+            <li
+              key={index}
+              onClick={handleCardClick}
+              className="py-2 text-gray-600 hover:text-rose-500 cursor-pointer"
+            >
               {activity}
             </li>
           ))}
